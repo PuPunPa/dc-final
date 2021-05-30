@@ -13,6 +13,24 @@ import (
 	_ "go.nanomsg.org/mangos/transport/all"
 )
 
+type Workload struct {
+	ID             int
+	Filter         string
+	Name           string
+	Status         string
+	RunningJobs    int
+	FilteredImages []int
+}
+
+type Image struct {
+	ID         int
+	WorkloadID int
+	Type       string
+	Name       string
+}
+
+var workloads []Workload
+
 var controllerAddress = "tcp://localhost:40899"
 
 func die(format string, v ...interface{}) {
@@ -42,4 +60,18 @@ func Start() {
 		}
 		time.Sleep(time.Second * 3)
 	}
+}
+
+func createWorkload(name string, filter string) (int, bool) {
+	newWorkload := Workload{len(workloads), filter, name, "Scheduling", 0, make([]int, 0)}
+	workloads = append(workloads, newWorkload)
+	return len(workloads), true
+}
+
+func getWorkload(id int) Workload {
+	return workloads[id]
+}
+
+func getWorkloads() []Workload {
+	return workloads
 }

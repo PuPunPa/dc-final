@@ -8,7 +8,7 @@ import (
 	"net"
 	"os"
 
-	pb "github.com/CodersSquad/dc-final/proto"
+	pb "github.com/PuPunPa/dc-final/proto"
 	"go.nanomsg.org/mangos"
 	"go.nanomsg.org/mangos/protocol/sub"
 	"google.golang.org/grpc"
