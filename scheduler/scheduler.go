@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	pb "github.com/CodersSquad/dc-final/proto"
+	pb "github.com/CodersSquad/dc-labs/challenges/third-partial/proto"
 	"google.golang.org/grpc"
 )
 
@@ -30,9 +30,16 @@ func schedule(job Job) {
 
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	r, err := c.SayHello(ctx, &pb.HelloRequest{Name: job.RPCName})
+	//Blurred Image
+	r, err := c.BlurImage(ctx, &pb.Image2Blur{Name: job.RPCName})
 	if err != nil {
-		log.Fatalf("could not greet: %v", err)
+		log.Fatalf("could not blur the Image: %v", err)
+	}
+	log.Printf("Scheduler: RPC respose from %s : %s", job.Address, r.GetMessage())
+	//GrayScale Image
+	r, err := c.GrayScaleImage(ctx, &pb.Image2GrayScale{Name: job.RPCName})
+	if err != nil {
+		log.Fatalf("could not grayscale the Image: %v", err)
 	}
 	log.Printf("Scheduler: RPC respose from %s : %s", job.Address, r.GetMessage())
 }

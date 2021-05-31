@@ -7,8 +7,8 @@ import (
 	"log"
 	"net"
 	"os"
-
-	pb "github.com/PuPunPa/dc-final/proto"
+	"C"
+	pb "github.com/CodersSquad/dc-labs/challenges/third-partial/proto"
 	"go.nanomsg.org/mangos"
 	"go.nanomsg.org/mangos/protocol/sub"
 	"google.golang.org/grpc"
@@ -27,22 +27,27 @@ type server struct {
 }
 
 var (
-	controllerAddress = ""
-	workerName        = ""
-	tags              = ""
+	controllerAddress 	= ""
+	workerName        	= ""
+	tags              	= ""
+	Status				= "Running"
+	Usage 				= "10%"
 )
 
 func die(format string, v ...interface{}) {
 	fmt.Fprintln(os.Stderr, fmt.Sprintf(format, v...))
 	os.Exit(1)
 }
-
-// SayHello implements helloworld.GreeterServer
-func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
+// BlurImage implements helloworld.BlurImage
+func (s *server) BlurImage(ctx context.Context, in *pb.Image2Blur) (*pb.BlurredImage, error) {
 	log.Printf("RPC: Received: %v", in.GetName())
-	return &pb.HelloReply{Message: "Hello " + in.GetName()}, nil
+	return &pb.BlurredImage{Message: "Hello " + in.GetName()}, nil
 }
-
+// GrayScaleImage implements helloworld.GrayScaleImage
+func (s *server) GrayScaleImage(ctx context.Context, in *pb.Image2GrayScale) (*pb.GrayscaledImage, error) {
+	log.Printf("RPC: Received: %v", in.GetName())
+	return &pb.GrayscaledImage{Message: "Hello " + in.GetName()}, nil
+}
 func init() {
 	flag.StringVar(&controllerAddress, "controller", "tcp://localhost:40899", "Controller address")
 	flag.StringVar(&workerName, "worker-name", "hard-worker", "Worker Name")

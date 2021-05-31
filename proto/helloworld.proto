@@ -18,22 +18,29 @@ option java_multiple_files = true;
 option java_package = "io.grpc.examples.helloworld";
 option java_outer_classname = "HelloWorldProto";
 
-option go_package = "github.com/CodersSquad/final-dc/proto";
-
-package proto;
+package helloworld;
 
 // The greeting service definition.
 service Greeter {
   // Sends a greeting
-  rpc SayHello (HelloRequest) returns (HelloReply) {}
+  rpc BlurImage (Image2Blur) returns (BlurredImage) {}
+  rpc GrayScaleImage (Image2GrayScale) returns (GrayscaledImage) {}
 }
-
-// The request message containing the user's name.
-message HelloRequest {
+// The request message containing the user's Image to be Blurred path.
+message Image2Blur {
   string name = 1;
 }
 
-// The response message containing the greetings
-message HelloReply {
+// The response message containing the Blurred Image path.
+message BlurredImage {
+  string message = 1;
+}
+// The request message containing the user's Image to be Grayscaled path.
+message Image2GrayScale {
+  string name = 1;
+}
+
+// The response message containing the Grayscaled Image path.
+message GrayscaledImage {
   string message = 1;
 }
