@@ -187,7 +187,6 @@ func getWorkload(w http.ResponseWriter, r *http.Request) {
 	}
 	w.WriteHeader(http.StatusOK)
 	vars := mux.Vars(r)
-	w.WriteHeader(http.StatusOK)
 	id := vars["workload_id"]
 	sendMessage(socket, "2_"+id)
 	rMsg := receiveMessage(socket)
@@ -210,6 +209,8 @@ func getImage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.WriteHeader(http.StatusOK)
+	vars := mux.Vars(r)
+	id := vars["workload_id"]
 	return
 }
 
