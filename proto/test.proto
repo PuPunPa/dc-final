@@ -15,13 +15,13 @@
 syntax = "proto3";
 
 option java_multiple_files = true;
-option java_package = "io.grpc.examples.helloworld";
-option java_outer_classname = "HelloWorldProto";
+option java_package = "io.grpc.examples.test";
+option java_outer_classname = "TestProto";
 
-package helloworld;
-
+package test;
+option go_package = "github.com/protocolbuffers/protobuf/examples/go/tutorialpb";
 // The greeting service definition.
-service Greeter {
+service Test {
   // Sends a greeting
   rpc BlurImage (Image2Blur) returns (BlurredImage) {}
   rpc GrayScaleImage (Image2GrayScale) returns (GrayscaledImage) {}

@@ -2,10 +2,11 @@ package controller
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"time"
+	"strings"
 	"strconv"
+	"github.com/HectorJorgeMoralesArch/dc-final/images"
 	"go.nanomsg.org/mangos"
 	"go.nanomsg.org/mangos/protocol/pub"
 
@@ -47,13 +48,13 @@ func die(format string, v ...interface{}) {
 func date() string {
 	return time.Now().Format(time.ANSIC)
 }
-func WorkerInfo(name string) (string)
-{
+func WorkerInfo(name string) (string){
 	for _,v := range Workers{
 		if v.Name == name{
-			return 
+			return name
 		}
 	}
+	return ""
 }
 
 //Function to add workload
@@ -62,12 +63,12 @@ func WorkloadId(name string) int{
 	for i,v := range Workloads{
 			if v.Name == name{
 				exists = true
-					allWorkloads[i].jobId++
-					return allWorkloads[i].jobId
+					Workloads[i].Id++
+					return Workloads[i].Id
 			}
 	}
 	if !exists{
-			newWorkload := workload{Name: name, Id: 1}
+			newWorkload := Workload{Name: name, Id: 1}
 			Workloads = append(Workloads, newWorkload)
 			return 1
 	}
@@ -93,17 +94,13 @@ func Start() {
 		die("can't listen on pub socket: %s", err.Error())
 	}
 	for {
-		fmt.Println("Checking workers")
-		d := date()
-		if err = sock.Send([]byte(d)); err != nil {
-			die("Failed: %s", err.Error())
-		}
 		i := 0
 		for {
+			var msg []byte
 				if msg, err = sock.Recv(); err != nil {
 						break
 				}
-				stats := strings.Split(string(msg), ",")
+				stats := strings.Split(string(msg), " ")
 				name := "Worker " + strconv.Itoa(i)
 				newWorker := Worker{Name: name, Status: stats[0], Usage: stats[1]}
 				alive := false
