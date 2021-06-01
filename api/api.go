@@ -134,7 +134,7 @@ func status(w http.ResponseWriter, r *http.Request) {
 {
 	"system_name": ` + name + `"
 	"server_time": "` + time.Now().Format("2006-01-02 15:04:05") + `"
-	"active_workloads": "
+	"active_workloads": ` + getWorkloads() + `
 }
 `
 	w.Write([]byte(msg))
@@ -276,10 +276,10 @@ func die(format string, v ...interface{}) {
 func Start() {
 	var err error
 	if socket, err = pair.NewSocket(); err != nil {
-		die("API: can't get new pub socket: %s", err)
+		die("API: can't get new pair socket: %s", err)
 	}
 	if err = socket.Dial(controllerAddress); err != nil {
-		die("API: can't listen on pub socket: %s", err.Error())
+		die("API: can't listen on pair socket: %s", err.Error())
 	}
 	router := mux.NewRouter()
 	users["username"] = "password"

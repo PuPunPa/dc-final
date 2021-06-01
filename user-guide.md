@@ -61,27 +61,14 @@ It displays the information as:
 The __*Status*__ command will receive the token of the user and show a message with the time.
 $ curl -H "Authorization: Bearer <ACCESS_TOKEN>" http://localhost:8080/status
 
-It displays the information as:
-
-{
-	"message": "Hi username, the DPIP System is Up and Running"
-	"time": "2015-03-07 11:06:39"
-}
-
 # Workloads
-The __*Workloads*__ command will receive the token of the user and show a message with the time.
-$ curl -H "Authorization: Bearer <ACCESS_TOKEN>" http://localhost:8080/status
+The __*Workloads*__ command will receive the token of the user and show every existing workload.
+$ curl -H "Authorization: Bearer <ACCESS_TOKEN>" http://localhost:8080/Workloads
 
-It displays the information as:
-
-{
-	"message": "Hi username, the DPIP System is Up and Running"
-	"time": "2015-03-07 11:06:39"
-}
 
 # Workloads/{workload_id}
-The __*Workloads/{workload_id}*__ command will receive the token of the user and show a message with the time.
-$ curl -H "Authorization: Bearer <ACCESS_TOKEN>" http://localhost:8080/status
+The __*Workloads/{workload_id}*__ command will receive the token of the user and the workload_id to show the Workload with that ID's information.
+$ curl -H "Authorization: Bearer <ACCESS_TOKEN>" http://localhost:8080/Workloads/{workload_id}
 
 It displays the information as:
 
@@ -91,34 +78,23 @@ It displays the information as:
 }
 
 # Images
-The __*Images*__ command will receive the token of the user and show a message with the time.
-$ curl -H "Authorization: Bearer <ACCESS_TOKEN>" http://localhost:8080/status
+The __*Images*__ command will receive the token of the user and an image
+$ curl -H "Authorization: Bearer <ACCESS_TOKEN>" http://localhost:8080/Images
 
-It displays the information as:
-
-{
-	"message": "Hi username, the DPIP System is Up and Running"
-	"time": "2015-03-07 11:06:39"
-}
 
 # images/{image_id}
-The __*images/{image_id}*__ command will receive the token of the user and show a message with the time.
-$ curl -H "Authorization: Bearer <ACCESS_TOKEN>" http://localhost:8080/status
+The __*images/{image_id}*__ command will receive the token of the user and an image id.
+$ curl -H "Authorization: Bearer <ACCESS_TOKEN>" http://localhost:8080/images/{image_id}
 
-It displays the information as:
-
-{
-	"message": "Hi username, the DPIP System is Up and Running"
-	"time": "2015-03-07 11:06:39"
-}
 
 ## Controller
 
 
 ## Scheduler
 
-## Worker
 
+## Worker
 $go run main.go --controller <host>:<port> --worker-name <worker_name> --tags <tag1>,<tag2>
+
 ## Documentation
 

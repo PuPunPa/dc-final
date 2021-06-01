@@ -17,7 +17,6 @@
 // 	protoc-gen-go v1.26.0
 // 	protoc        v3.16.0
 // source: proto/test.proto
-
 package tutorialpb
 
 import (

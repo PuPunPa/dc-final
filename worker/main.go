@@ -80,7 +80,6 @@ func joinCluster() {
 		log.Printf("Message-Passing: Worker(%s): Received %s\n", workerName, string(msg))
 	}
 }
-
 func getAvailablePort() int {
 	port := defaultRPCPort
 	for {
@@ -94,13 +93,10 @@ func getAvailablePort() int {
 	}
 	return port
 }
-
 func main() {
 	flag.Parse()
-
 	// Subscribe to Controller
 	go joinCluster()
-
 	// Setup Worker RPC Server
 	rpcPort := getAvailablePort()
 	log.Printf("Starting RPC Service on localhost:%v", rpcPort)

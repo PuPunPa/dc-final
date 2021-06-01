@@ -5,6 +5,7 @@ import (
 	"log"
 	"math/rand"
 	"time"
+
 	"github.com/HectorJorgeMoralesArch/dc-final/api"
 	"github.com/HectorJorgeMoralesArch/dc-final/controller"
 	"github.com/HectorJorgeMoralesArch/dc-final/scheduler"
@@ -38,3 +39,4 @@ func main() {
 		time.Sleep(time.Second * 5)
 	}
 }
+

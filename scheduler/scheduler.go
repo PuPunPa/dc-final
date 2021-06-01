@@ -44,7 +44,6 @@ func schedule(job Job) {
 	}
 	log.Printf("Scheduler: RPC respose from %s : %s", job.Address, r.GetMessage())
 }
-
 func Start(jobs chan Job) error {
 	for {
 		job := <-jobs
